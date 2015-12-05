@@ -12,6 +12,7 @@
 		275F2CD51C12CE2A00F8BE2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD31C12CE2A00F8BE2F /* Main.storyboard */; };
 		275F2CD71C12CE2A00F8BE2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD61C12CE2A00F8BE2F /* Assets.xcassets */; };
 		275F2CDA1C12CE2A00F8BE2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD81C12CE2A00F8BE2F /* LaunchScreen.storyboard */; };
+		8CF795B7ACD98FC5001EF970 /* Pods_GoodWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C012A75D309E82CEEA1010D0 /* Pods_GoodWeather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		275F2CD61C12CE2A00F8BE2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		275F2CD91C12CE2A00F8BE2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		275F2CDB1C12CE2A00F8BE2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A3EFC1561E5E16F6174C314 /* Pods-GoodWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodWeather/Pods-GoodWeather.debug.xcconfig"; sourceTree = "<group>"; };
+		C012A75D309E82CEEA1010D0 /* Pods_GoodWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E126047CF6894073AB5448D0 /* Pods-GoodWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodWeather/Pods-GoodWeather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF795B7ACD98FC5001EF970 /* Pods_GoodWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				275F2CCE1C12CE2A00F8BE2F /* GoodWeather */,
 				275F2CCD1C12CE2A00F8BE2F /* Products */,
+				B9C6B133928B541B67D2335F /* Pods */,
+				A63E1281B78777CE44C5144E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = GoodWeather;
 			sourceTree = "<group>";
 		};
+		A63E1281B78777CE44C5144E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C012A75D309E82CEEA1010D0 /* Pods_GoodWeather.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9C6B133928B541B67D2335F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A3EFC1561E5E16F6174C314 /* Pods-GoodWeather.debug.xcconfig */,
+				E126047CF6894073AB5448D0 /* Pods-GoodWeather.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 275F2CDE1C12CE2A00F8BE2F /* Build configuration list for PBXNativeTarget "GoodWeather" */;
 			buildPhases = (
+				B6C6866054B1E9D3DD45D13A /* Check Pods Manifest.lock */,
 				275F2CC81C12CE2A00F8BE2F /* Sources */,
 				275F2CC91C12CE2A00F8BE2F /* Frameworks */,
 				275F2CCA1C12CE2A00F8BE2F /* Resources */,
+				EA648AA8B1DBC81EF844E32D /* Embed Pods Frameworks */,
+				84369048B1605E15C73B54FE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84369048B1605E15C73B54FE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoodWeather/Pods-GoodWeather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6C6866054B1E9D3DD45D13A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EA648AA8B1DBC81EF844E32D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoodWeather/Pods-GoodWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		275F2CC81C12CE2A00F8BE2F /* Sources */ = {
@@ -247,6 +322,7 @@
 		};
 		275F2CDF1C12CE2A00F8BE2F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A3EFC1561E5E16F6174C314 /* Pods-GoodWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GoodWeather/Info.plist;
@@ -258,6 +334,7 @@
 		};
 		275F2CE01C12CE2A00F8BE2F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E126047CF6894073AB5448D0 /* Pods-GoodWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GoodWeather/Info.plist;
@@ -286,6 +363,7 @@
 				275F2CE01C12CE2A00F8BE2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
