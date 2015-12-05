@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E551C12E38A00F10330 /* AppDelegate.swift */; };
 		27532E5A1C12E38A00F10330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E561C12E38A00F10330 /* ViewController.swift */; };
+		27532E5C1C12E3CC00F10330 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E5B1C12E3CC00F10330 /* Weather.swift */; };
+		27532E5F1C12E63B00F10330 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E5E1C12E63B00F10330 /* Const.swift */; };
+		27532E611C12E6AE00F10330 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E601C12E6AE00F10330 /* APIClient.swift */; };
 		275F2CD51C12CE2A00F8BE2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD31C12CE2A00F8BE2F /* Main.storyboard */; };
 		275F2CD71C12CE2A00F8BE2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD61C12CE2A00F8BE2F /* Assets.xcassets */; };
 		275F2CDA1C12CE2A00F8BE2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275F2CD81C12CE2A00F8BE2F /* LaunchScreen.storyboard */; };
@@ -18,6 +21,9 @@
 /* Begin PBXFileReference section */
 		27532E551C12E38A00F10330 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27532E561C12E38A00F10330 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27532E5B1C12E3CC00F10330 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		27532E5E1C12E63B00F10330 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Const.swift; path = Utility/Const.swift; sourceTree = "<group>"; };
+		27532E601C12E6AE00F10330 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = Utility/APIClient.swift; sourceTree = "<group>"; };
 		275F2CCC1C12CE2A00F8BE2F /* GoodWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		275F2CD41C12CE2A00F8BE2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		275F2CD61C12CE2A00F8BE2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,6 +49,7 @@
 		27532E531C12E38A00F10330 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				27532E5D1C12E60F00F10330 /* Utility */,
 				27532E541C12E38A00F10330 /* Controller */,
 				27532E571C12E38A00F10330 /* Model */,
 				27532E581C12E38A00F10330 /* View */,
@@ -62,6 +69,7 @@
 		27532E571C12E38A00F10330 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				27532E5B1C12E3CC00F10330 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -71,6 +79,15 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		27532E5D1C12E60F00F10330 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				27532E5E1C12E63B00F10330 /* Const.swift */,
+				27532E601C12E6AE00F10330 /* APIClient.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		275F2CC31C12CE2A00F8BE2F = {
@@ -243,6 +260,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27532E5A1C12E38A00F10330 /* ViewController.swift in Sources */,
+				27532E5F1C12E63B00F10330 /* Const.swift in Sources */,
+				27532E5C1C12E3CC00F10330 /* Weather.swift in Sources */,
+				27532E611C12E6AE00F10330 /* APIClient.swift in Sources */,
 				27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
