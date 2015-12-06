@@ -14,7 +14,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        ModelManager.sharedInstance.getDailyWeather(35, lon: 139)
+        ModelManager.sharedInstance.getDailyWeather(35, lon: 139, callback: {(error) in
+            if error == nil {
+                // reload table
+            } else {
+                print(error)
+                // Show alert
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {

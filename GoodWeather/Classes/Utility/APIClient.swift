@@ -50,7 +50,8 @@ class APIClient {
         let params = [
             "lat": String(lat),
             "lon": String(lon),
-            "appid": appId
+            "appid": appId,
+            "cnt": "7"
         ]
         
         Alamofire.request(.GET, baseDailyURL, parameters: params)
