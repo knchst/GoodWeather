@@ -26,47 +26,29 @@ struct Weather {
         let json = JSON(data: data)
         var weather = Weather()
         
-        if let id = json["id"].int {
+        if let
+            id = json["id"].int,
+            lon = json["coord"]["lon"].double,
+            lat = json["coord"]["lat"].double,
+            main = json["weather"][0]["main"].string,
+            description = json["weather"][0]["description"].string,
+            icon = json["weather"][0]["icon"].string,
+            temp = json["main"]["temp"].double,
+            pressure = json["main"]["pressure"].double,
+            humidity = json["main"]["humidity"].double,
+            temp_max = json["main"]["temp_max"].double,
+            temp_min = json["main"]["temp_min"].double
+        {
             weather.id = id
-        }
-        
-        if let lon = json["coord"]["lon"].double {
             weather.lon = lon
-        }
-        
-        if let lat = json["coord"]["lat"].double {
             weather.lat = lat
-        }
-        
-        if let main = json["weather"][0]["main"].string {
             weather.main = main
-        }
-        
-        if let description = json["weather"][0]["description"].string {
             weather.description = description
-        }
-        
-        if let icon = json["weather"][0]["icon"].string {
             weather.icon = icon
-        }
-        
-        if let temp = json["main"]["temp"].double {
             weather.temp = temp
-        }
-        
-        if let pressure = json["main"]["pressure"].double {
             weather.pressure = pressure
-        }
-        
-        if let humidity = json["main"]["humidity"].double {
             weather.humidity = humidity
-        }
-        
-        if let temp_max = json["main"]["temp_max"].double {
             weather.temp_max = temp_max
-        }
-        
-        if let temp_min = json["main"]["temp_min"].double {
             weather.temp_min = temp_min
         }
         

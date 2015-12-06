@@ -22,6 +22,10 @@ class ViewController: UIViewController {
                 // Show alert
             }
         })
+        
+        ModelManager.sharedInstance.getWeather(35, lon: 139, callback: {(error, weather) in
+            print(weather)
+        })
     }
 
     override func didReceiveMemoryWarning() {

@@ -37,63 +37,37 @@ struct DailyWeather {
             
             var weather = DailyWeather()
             
-            if let id = json["city"]["id"].int {
+            if let
+                id = json["city"]["id"].int,
+                lon = json["city"]["coord"]["lon"].double,
+                lat = json["city"]["coord"]["lat"].double,
+                name = json["city"]["name"].string,
+                cnt = json["cnt"].int,
+                description = json["list"][i]["weather"][0]["description"].string,
+                icon = json["list"][i]["weather"][0]["icon"].string,
+                humidity = json["list"][i]["humidity"].double,
+                pressure = json["list"][i]["pressure"].double,
+                day = json["list"][i]["temp"]["day"].double,
+                eve = json["list"][i]["temp"]["eve"].double,
+                morn = json["list"][i]["temp"]["morn"].double,
+                night = json["list"][i]["temp"]["night"].double,
+                min = json["list"][i]["temp"]["min"].double,
+                max = json["list"][i]["temp"]["max"].double
+            {
                 weather.id = id
-            }
-            
-            if let lon = json["city"]["coord"]["lon"].double {
                 weather.lon = lon
-            }
-            
-            if let lat = json["city"]["coord"]["lat"].double {
                 weather.lat = lat
-            }
-            
-            if let name = json["city"]["name"].string {
                 weather.name = name
-            }
-            
-            if let cnt = json["cnt"].int {
                 weather.cnt = cnt
-            }
-            
-            if let description = json["list"][i]["weather"][0]["description"].string {
                 weather.description = description
-            }
-            
-            if let icon = json["list"][i]["weather"][0]["icon"].string {
                 weather.icon = icon
-            }
-
-            if let humidity = json["list"][i]["humidity"].double {
                 weather.humidity = humidity
-            }
-            
-            if let pressure = json["list"][i]["pressure"].double {
                 weather.pressure = pressure
-            }
-            
-            if let day = json["list"][i]["temp"]["day"].double {
                 weather.day = day
-            }
-            
-            if let eve = json["list"][i]["temp"]["eve"].double {
                 weather.eve = eve
-            }
-            
-            if let morn = json["list"][i]["temp"]["morn"].double {
                 weather.morn = morn
-            }
-            
-            if let night = json["list"][i]["temp"]["night"].double {
                 weather.night = night
-            }
-
-            if let min = json["list"][i]["temp"]["min"].double {
                 weather.min = min
-            }
-
-            if let max = json["list"][i]["temp"]["max"].double {
                 weather.max = max
             }
             
