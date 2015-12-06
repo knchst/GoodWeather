@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        APIClient.sharedInstance.getCurrentWeather(35, lon: 139)
+        ModelManager.sharedInstance.getDailyWeather(35, lon: 139)
     }
 
     override func didReceiveMemoryWarning() {

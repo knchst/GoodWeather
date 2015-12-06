@@ -11,15 +11,13 @@ import Alamofire
 
 class APIClient {
     
-    var weather: Weather!
-    
     init() {
         
     }
     
     static let sharedInstance = APIClient()
     
-    func getCurrentWeather(lat: Double, lon: Double) {
+    func getCurrentWeather(lat: Double, lon: Double, callback: ((NSError?, Weather?) -> ())) {
         
         let params = [
             "lat": String(lat),
@@ -27,20 +25,51 @@ class APIClient {
             "appid": appId
         ]
         
-        Alamofire.request(.GET, baseURL, parameters: params)
+        Alamofire.request(.GET, baseCurrentURL, parameters: params)
             .responseJSON { response in
+                
                 print(response.request)
                 print(response.response)
                 print(response.data)
                 print(response.result)
                 
                 switch response.result {
+                    
                 case .Success:
                     if let data = response.data {
-                        self.weather = Weather.parseJSON(data)
+                        callback(nil, Weather.parseJSON(data))
                     }
                 case .Failure(let error):
                     print(error)
+                    callback(error, nil)
+                }
+        }
+    }
+    
+    func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?, [DailyWeather]?) -> ())) {
+        let params = [
+            "lat": String(lat),
+            "lon": String(lon),
+            "appid": appId
+        ]
+        
+        Alamofire.request(.GET, baseDailyURL, parameters: params)
+            .responseJSON { response in
+                
+                print(response.request)
+                print(response.response)
+                print(response.data)
+                print(response.result)
+                
+                switch response.result {
+                    
+                case .Success:
+                    if let data = response.data {
+                        callback(nil, DailyWeather.parseJSON(data))
+                    }
+                case .Failure(let error):
+                    print(error)
+                    callback(error, nil)
                 }
         }
     }
