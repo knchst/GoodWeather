@@ -17,7 +17,7 @@ class APIClient {
     
     static let sharedInstance = APIClient()
     
-    func getCurrentWeather(lat: Double, lon: Double, callback: ((NSError?, Weather?) -> ())) {
+    func getCurrentWeather(lat: Double, lon: Double, callback: ((NSError?, NSData?) -> ())) {
         
         let params = [
             "lat": String(lat),
@@ -37,7 +37,7 @@ class APIClient {
                     
                 case .Success:
                     if let data = response.data {
-                        callback(nil, Weather.parseJSON(data))
+                        callback(nil, data)
                     }
                 case .Failure(let error):
                     print(error)
@@ -46,7 +46,7 @@ class APIClient {
         }
     }
     
-    func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?, [DailyWeather]?) -> ())) {
+    func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?, NSData?) -> ())) {
         let params = [
             "lat": String(lat),
             "lon": String(lon),
@@ -66,7 +66,7 @@ class APIClient {
                     
                 case .Success:
                     if let data = response.data {
-                        callback(nil, DailyWeather.parseJSON(data))
+                        callback(nil, data)
                     }
                 case .Failure(let error):
                     print(error)

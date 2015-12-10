@@ -19,8 +19,9 @@ class ModelManager {
     static let sharedInstance = ModelManager()
     
     func getWeather(lat: Double, lon: Double, callback: ((NSError?, Weather?) -> ())) {
-        APIClient.sharedInstance.getCurrentWeather(lat, lon: lon, callback: {(error, weather) in
+        APIClient.sharedInstance.getCurrentWeather(lat, lon: lon, callback: {(error, data) in
             if error == nil {
+                let weather = Weather.parseJSON(data!)
                 callback(nil, weather)
             } else {
                 callback(error, nil)
@@ -31,8 +32,9 @@ class ModelManager {
     func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?) -> ())) {
         weak var weakSelf = self
         
-        APIClient.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error, dailyWeather) in
+        APIClient.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error, data) in
             if error == nil {
+                let dailyWeather = DailyWeather.parseJSON(data!)
                 weakSelf?.dailyWeather = dailyWeather
                 callback(nil)
             } else {
