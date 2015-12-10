@@ -28,13 +28,12 @@ class APIClient {
         Alamofire.request(.GET, baseCurrentURL, parameters: params)
             .responseJSON { response in
                 
-                print(response.request)
-                print(response.response)
-                print(response.data)
-                print(response.result)
+//                print(response.request)
+//                print(response.response)
+//                print(response.data)
+//                print(response.result)
                 
                 switch response.result {
-                    
                 case .Success:
                     if let data = response.data {
                         callback(nil, data)
@@ -47,6 +46,7 @@ class APIClient {
     }
     
     func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?, NSData?) -> ())) {
+        
         let params = [
             "lat": String(lat),
             "lon": String(lon),
@@ -57,13 +57,12 @@ class APIClient {
         Alamofire.request(.GET, baseDailyURL, parameters: params)
             .responseJSON { response in
                 
-                print(response.request)
-                print(response.response)
-                print(response.data)
-                print(response.result)
+//                print(response.request)
+//                print(response.response)
+//                print(response.data)
+//                print(response.result)
                 
                 switch response.result {
-                    
                 case .Success:
                     if let data = response.data {
                         callback(nil, data)
