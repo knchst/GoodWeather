@@ -10,7 +10,7 @@ import Foundation
 
 class ModelManager {
     
-    var dailyWeather: [DailyWeather]!
+    var dailyWeather = [DailyWeather]()
     
     init() {
         

@@ -25,6 +25,8 @@ struct DailyWeather {
     var night: Double?
     var min: Double?
     var max: Double?
+    var main: String?
+    var dt: String?
     
     static func parseJSON(data: NSData) -> [DailyWeather] {
         let json = JSON(data: data)
@@ -52,7 +54,9 @@ struct DailyWeather {
                 morn = json["list"][i]["temp"]["morn"].double,
                 night = json["list"][i]["temp"]["night"].double,
                 min = json["list"][i]["temp"]["min"].double,
-                max = json["list"][i]["temp"]["max"].double
+                max = json["list"][i]["temp"]["max"].double,
+                main = json["list"][i]["weather"][0]["main"].string,
+                dt = json["list"][i]["dt"].int
             {
                 weather.id = id
                 weather.lon = lon
@@ -63,12 +67,14 @@ struct DailyWeather {
                 weather.icon = icon
                 weather.humidity = humidity
                 weather.pressure = pressure
-                weather.day = day
-                weather.eve = eve
-                weather.morn = morn
-                weather.night = night
-                weather.min = min
-                weather.max = max
+                weather.day = calcKelvin(day)
+                weather.eve = calcKelvin(eve)
+                weather.morn = calcKelvin(morn)
+                weather.night = calcKelvin(night)
+                weather.min = calcKelvin(min)
+                weather.max = calcKelvin(max)
+                weather.main = main
+                weather.dt = translateUnixTime(dt)
             }
             
             dailyWeather.append(weather)
@@ -78,5 +84,16 @@ struct DailyWeather {
         print(dailyWeather)
         
         return dailyWeather
+    }
+    
+    static func calcKelvin(temp: Double) -> Double {
+        return floor(temp - 273.15)
+    }
+    
+    static func translateUnixTime(dt: Int) -> String? {
+        let date = NSDate(timeIntervalSince1970: Double(dt))
+        let format = NSDateFormatter()
+        format.dateFormat = "MM/dd"
+        return format.stringFromDate(date)
     }
 }

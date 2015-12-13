@@ -9,7 +9,15 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var minLabel: UILabel!
+    @IBOutlet weak var maxLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var tableViewTopConstrait: NSLayoutConstraint!
     
     var manager: CLLocationManager!
 
@@ -20,6 +28,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         manager = CLLocationManager()
         manager.delegate = self
         manager.requestLocation()
+        
+        tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,11 +63,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ModelManager.sharedInstance.dailyWeather.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(dailyWeatherCellIdetifier, forIndexPath: indexPath) as! DailyWeatherTableViewCell
+        let dailyWeather = ModelManager.sharedInstance.dailyWeather[indexPath.row]
+        cell.setData(dailyWeather)
+        return cell
+    }
+    
     func refreshWeather(lat: Double, lon: Double) {
+        
+        weak var weakSelf = self
         
         ModelManager.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error) in
             if error == nil {
-                // reload table
+                weakSelf?.tableView.reloadData()
             } else {
                 print(error)
                 // Show alert
@@ -62,7 +88,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         })
         
         ModelManager.sharedInstance.getWeather(lat, lon: lon, callback: {(error, weather) in
-            print(weather)
+            if error == nil {
+                weakSelf?.nameLabel.text = weather?.name!
+                weakSelf?.minLabel.text = String(format: "%g℃", (weather?.temp_min)!)
+                weakSelf?.maxLabel.text = String(format: "%g℃", (weather?.temp_max)!)
+                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)
+                weakSelf?.descriptionLabel.text = weather?.description!
+            } else {
+                print(error)
+                // show alert
+            }
         })
     }
 }
