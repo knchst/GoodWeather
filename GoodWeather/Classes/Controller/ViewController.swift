@@ -114,7 +114,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     func transitionBackground() {
-                
+        
         let gradientColors: [[CGColor]] = [
             [lightBlueColor.CGColor, lightPinkColor.CGColor],
             [lightBlueColor.CGColor, lightGreenColor.CGColor],
@@ -124,17 +124,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = gradientColors[random() % gradientColors.count]
-        gradientLayer.frame = self.view.bounds
+        gradientLayer.frame = self.view.frame
         
         let gradientImage = Utility.imageFromLayer(gradientLayer)
         
         let transition = CATransition()
         transition.duration = 3.0
         transition.type = kCATransitionFade
-        self.view.layer.addAnimation(transition, forKey: nil)
-        backgroundImageView.image = gradientImage
         
-        self.view.layer.addAnimation(transition, forKey: nil)
+        backgroundImageView.layer.addAnimation(transition, forKey: nil)
+        backgroundImageView.image = gradientImage
     }
 }
 
