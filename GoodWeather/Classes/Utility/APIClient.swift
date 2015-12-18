@@ -31,7 +31,7 @@ class APIClient {
 //                print(response.request)
 //                print(response.response)
 //                print(response.data)
-//                print(response.result)
+//                print(response.result.value)
                 
                 switch response.result {
                 case .Success:
@@ -60,7 +60,7 @@ class APIClient {
 //                print(response.request)
 //                print(response.response)
 //                print(response.data)
-//                print(response.result)
+//                print(response.result.value)
                 
                 switch response.result {
                 case .Success:

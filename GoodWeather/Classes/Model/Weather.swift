@@ -21,6 +21,7 @@ struct Weather {
     var humidity: Double?
     var temp_min: Double?
     var temp_max: Double?
+    var name: String?
     
     static func parseJSON(data: NSData) -> Weather {
         let json = JSON(data: data)
@@ -37,7 +38,8 @@ struct Weather {
             pressure = json["main"]["pressure"].double,
             humidity = json["main"]["humidity"].double,
             temp_max = json["main"]["temp_max"].double,
-            temp_min = json["main"]["temp_min"].double
+            temp_min = json["main"]["temp_min"].double,
+            name = json["name"].string
         {
             weather.id = id
             weather.lon = lon
@@ -45,15 +47,20 @@ struct Weather {
             weather.main = main
             weather.description = description
             weather.icon = icon
-            weather.temp = temp
+            weather.temp = calcKelvin(temp)
             weather.pressure = pressure
             weather.humidity = humidity
-            weather.temp_max = temp_max
-            weather.temp_min = temp_min
+            weather.temp_max = calcKelvin(temp_max)
+            weather.temp_min = calcKelvin(temp_min)
+            weather.name = name
         }
         
         print(weather)
         
         return weather
+    }
+    
+    static func calcKelvin(temp: Double) -> Double {
+        return floor(temp - 273.15)
     }
 }
