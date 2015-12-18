@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27073E2C1C1FCED600D0F326 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27073E2B1C1FCED600D0F326 /* Utility.swift */; };
 		2750A54E1C14177C00D17291 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54D1C14177C00D17291 /* ModelManager.swift */; };
 		2750A5501C141F3800D17291 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54F1C141F3800D17291 /* DailyWeather.swift */; };
 		27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E551C12E38A00F10330 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27073E2B1C1FCED600D0F326 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utility.swift; path = Utility/Utility.swift; sourceTree = "<group>"; };
 		2750A54D1C14177C00D17291 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		2750A54F1C141F3800D17291 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		27532E551C12E38A00F10330 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				27532E5E1C12E63B00F10330 /* Const.swift */,
 				27532E601C12E6AE00F10330 /* APIClient.swift */,
+				27073E2B1C1FCED600D0F326 /* Utility.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				27D6C9CF1C19EBC80033BCC0 /* DailyWeatherTableViewCell.swift in Sources */,
 				27532E5A1C12E38A00F10330 /* ViewController.swift in Sources */,
+				27073E2C1C1FCED600D0F326 /* Utility.swift in Sources */,
 				2750A5501C141F3800D17291 /* DailyWeather.swift in Sources */,
 				27532E5F1C12E63B00F10330 /* Const.swift in Sources */,
 				27532E5C1C12E3CC00F10330 /* Weather.swift in Sources */,

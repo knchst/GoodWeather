@@ -20,6 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var tableViewTopConstrait: NSLayoutConstraint!
     
     var manager: CLLocationManager!
+    @IBOutlet weak var backgroundImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,15 +86,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.tableView.reloadData()
             } else {
                 print(error)
-                // Show alert
+                
+                let alert = UIAlertController(title: "Error", message: "Oops! Please try again!!", preferredStyle: .Alert)
+                let retryAction = UIAlertAction(title: "Try Again!", style: .Default, handler: { action in
+                    weakSelf?.manager.requestLocation()
+                })
+                
+                alert.addAction(retryAction)
+                weakSelf?.presentViewController(alert, animated: true, completion: nil)
+                
+                return
             }
         })
         
         ModelManager.sharedInstance.getWeather(lat, lon: lon, callback: {(error, weather) in
             if error == nil {
                 weakSelf?.nameLabel.text = weather?.name!
-                weakSelf?.minLabel.text = String(format: "%g℃", (weather?.temp_min)!)
-                weakSelf?.maxLabel.text = String(format: "%g℃", (weather?.temp_max)!)
+                weakSelf?.minLabel.text = String(format: "%g°", (weather?.temp_min)!)
+                weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
                 weakSelf?.imageView.image = UIImage(named: (weather?.main)!)
                 weakSelf?.descriptionLabel.text = weather?.description!
             } else {
@@ -99,6 +111,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 // show alert
             }
         })
+    }
+    
+    func transitionBackground() {
+                
+        let gradientColors: [[CGColor]] = [
+            [lightBlueColor.CGColor, lightPinkColor.CGColor],
+            [lightBlueColor.CGColor, lightGreenColor.CGColor],
+            [darkBlueColor.CGColor, lightGreenColor.CGColor],
+            [lightPinkColor.CGColor, lightGreenColor.CGColor]
+        ]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors[random() % gradientColors.count]
+        gradientLayer.frame = self.view.bounds
+        
+        let gradientImage = Utility.imageFromLayer(gradientLayer)
+        
+        let transition = CATransition()
+        transition.duration = 3.0
+        transition.type = kCATransitionFade
+        self.view.layer.addAnimation(transition, forKey: nil)
+        backgroundImageView.image = gradientImage
+        
+        self.view.layer.addAnimation(transition, forKey: nil)
     }
 }
 
