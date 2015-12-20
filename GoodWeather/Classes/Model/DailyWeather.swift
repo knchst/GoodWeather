@@ -67,14 +67,14 @@ struct DailyWeather {
                 weather.icon = icon
                 weather.humidity = humidity
                 weather.pressure = pressure
-                weather.day = calcKelvin(day)
-                weather.eve = calcKelvin(eve)
-                weather.morn = calcKelvin(morn)
-                weather.night = calcKelvin(night)
-                weather.min = calcKelvin(min)
-                weather.max = calcKelvin(max)
+                weather.day = Utility.calcKelvin(day)
+                weather.eve = Utility.calcKelvin(eve)
+                weather.morn = Utility.calcKelvin(morn)
+                weather.night = Utility.calcKelvin(night)
+                weather.min = Utility.calcKelvin(min)
+                weather.max = Utility.calcKelvin(max)
                 weather.main = main
-                weather.dt = translateUnixTime(dt)
+                weather.dt = Utility.translateUnixTime(dt)
             }
             
             dailyWeather.append(weather)
@@ -84,16 +84,5 @@ struct DailyWeather {
         print(dailyWeather)
         
         return dailyWeather
-    }
-    
-    static func calcKelvin(temp: Double) -> Double {
-        return floor(temp - 273.15)
-    }
-    
-    static func translateUnixTime(dt: Int) -> String? {
-        let date = NSDate(timeIntervalSince1970: Double(dt))
-        let format = NSDateFormatter()
-        format.dateFormat = "MM/dd"
-        return format.stringFromDate(date)
     }
 }

@@ -34,4 +34,32 @@ class Utility {
         
         return renderedImage
     }
+    
+    static func makeGradient(frame: CGRect) -> UIImage {
+        let gradientColors: [[CGColor]] = [
+            [lightBlueColor.CGColor, lightPinkColor.CGColor],
+            [lightBlueColor.CGColor, lightGreenColor.CGColor],
+            [darkBlueColor.CGColor, lightGreenColor.CGColor],
+            [lightPinkColor.CGColor, lightGreenColor.CGColor]
+        ]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors[random() % gradientColors.count]
+        gradientLayer.frame = frame
+        
+        let gradientImage = Utility.imageFromLayer(gradientLayer)
+        
+        return gradientImage
+    }
+    
+    static func calcKelvin(temp: Double) -> Double {
+        return floor(temp - 273.15)
+    }
+    
+    static func translateUnixTime(dt: Int) -> String? {
+        let date = NSDate(timeIntervalSince1970: Double(dt))
+        let format = NSDateFormatter()
+        format.dateFormat = "MM/dd"
+        return format.stringFromDate(date)
+    }
 }
