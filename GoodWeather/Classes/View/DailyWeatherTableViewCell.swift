@@ -19,6 +19,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        weatherImageView.tintColor = .whiteColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -29,7 +30,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
     
     func setData(dailyWeather: DailyWeather) {
         
-        weatherImageView.image = UIImage(named: dailyWeather.main!)
+        weatherImageView.image = UIImage(named: dailyWeather.main!)?.imageWithRenderingMode(.AlwaysTemplate)
         dateLabel.text = dailyWeather.dt!
         descriptionLabel.text = dailyWeather.description
         tempMaxLabel.text = String(format: "%g°", dailyWeather.max!)

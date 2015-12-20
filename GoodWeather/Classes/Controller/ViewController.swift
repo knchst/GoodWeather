@@ -18,9 +18,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tableViewTopConstrait: NSLayoutConstraint!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     var manager: CLLocationManager!
-    @IBOutlet weak var backgroundImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         tableView.delegate = self
         
         NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
+        
+        imageView.tintColor = .whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,7 +106,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.nameLabel.text = weather?.name!
                 weakSelf?.minLabel.text = String(format: "%g°", (weather?.temp_min)!)
                 weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
-                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)
+                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
                 weakSelf?.descriptionLabel.text = weather?.description!
             } else {
                 print(error)
