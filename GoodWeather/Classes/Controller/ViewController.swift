@@ -18,9 +18,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tableViewTopConstrait: NSLayoutConstraint!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     var manager: CLLocationManager!
-    @IBOutlet weak var backgroundImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         tableView.delegate = self
         
         NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
+        
+        imageView.tintColor = .whiteColor()
+        
+        backgroundImageView.image = Utility.makeGradient(self.view.frame)
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,7 +108,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.nameLabel.text = weather?.name!
                 weakSelf?.minLabel.text = String(format: "%g°", (weather?.temp_min)!)
                 weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
-                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)
+                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
                 weakSelf?.descriptionLabel.text = weather?.description!
             } else {
                 print(error)
@@ -115,25 +119,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     func transitionBackground() {
         
-        let gradientColors: [[CGColor]] = [
-            [lightBlueColor.CGColor, lightPinkColor.CGColor],
-            [lightBlueColor.CGColor, lightGreenColor.CGColor],
-            [darkBlueColor.CGColor, lightGreenColor.CGColor],
-            [lightPinkColor.CGColor, lightGreenColor.CGColor]
-        ]
-        
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors[random() % gradientColors.count]
-        gradientLayer.frame = self.view.frame
-        
-        let gradientImage = Utility.imageFromLayer(gradientLayer)
-        
         let transition = CATransition()
         transition.duration = 3.0
         transition.type = kCATransitionFade
         
         backgroundImageView.layer.addAnimation(transition, forKey: nil)
-        backgroundImageView.image = gradientImage
+        backgroundImageView.image = Utility.makeGradient(self.view.frame)
     }
 }
 
