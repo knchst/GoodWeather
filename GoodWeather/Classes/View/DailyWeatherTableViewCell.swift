@@ -20,6 +20,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         weatherImageView.tintColor = .whiteColor()
+        self.selectionStyle = .None
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

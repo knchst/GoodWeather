@@ -34,6 +34,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorColor = .clearColor()
         
         NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
         
