@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Walhalla
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -21,6 +22,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     var manager: CLLocationManager!
+    var indicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         imageView.tintColor = .whiteColor()
         
         backgroundImageView.image = Utility.makeGradient(self.view.frame)
+        
+        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,13 +90,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     func refreshWeather(lat: Double, lon: Double) {
         
+        indicator.startAnimating()
+        
         weak var weakSelf = self
         
         ModelManager.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error) in
             if error == nil {
                 weakSelf?.tableView.reloadData()
+                weakSelf?.indicator.stopAnimating()
             } else {
                 print(error)
+                
+                weakSelf?.indicator.stopAnimating()
                 
                 let alert = UIAlertController(title: "Error", message: "Oops! Please try again!!", preferredStyle: .Alert)
                 let retryAction = UIAlertAction(title: "Try Again!", style: .Default, handler: { action in
@@ -111,6 +122,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
                 weakSelf?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
                 weakSelf?.descriptionLabel.text = weather?.description!
+                
+                Walhalla.performAnimation((weakSelf?.nameLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.minLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.maxLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.imageView)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.descriptionLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
             } else {
                 print(error)
                 // show alert

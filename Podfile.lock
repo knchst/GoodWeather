@@ -1,16 +1,16 @@
 PODS:
   - Alamofire (3.1.3)
-  - MisterFusion (0.6.0)
   - SwiftyJSON (2.3.1)
+  - Walhalla (0.1.0)
 
 DEPENDENCIES:
   - Alamofire
-  - MisterFusion
   - SwiftyJSON
+  - Walhalla
 
 SPEC CHECKSUMS:
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
-  MisterFusion: 4c0bed7dcee6f2d86f9900a1963a46ce4ec989b8
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  Walhalla: 6d93769dec99c188bd4112f8cb1857dd2a874bc4
 
 COCOAPODS: 0.39.0
