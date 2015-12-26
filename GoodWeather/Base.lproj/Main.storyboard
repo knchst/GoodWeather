@@ -179,7 +179,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="HIi-0A-mjk"/>
+                    <navigationItem key="navigationItem" id="HIi-0A-mjk">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="D67-D1-Bpy">
+                            <connections>
+                                <action selector="goSetting:" destination="BYZ-38-t0r" id="TiC-wf-EzD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="backgroundImageView" destination="NTV-Xh-eQ0" id="4Sk-6L-zk0"/>
                         <outlet property="descriptionLabel" destination="Jly-eP-TwA" id="k96-8v-iDx"/>
@@ -212,6 +218,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BZJ-em-k4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="325" y="205"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="GbH-ih-2yn">
+            <objects>
+                <viewController id="1ve-r3-Xzv" customClass="SettingsViewController" customModule="GoodWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rbL-BM-7V8"/>
+                        <viewControllerLayoutGuide type="bottom" id="gFU-xC-LSG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r1J-66-N00">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xgm-og-5BQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xgm-og-5BQ" secondAttribute="trailing" id="1vv-vs-wgK"/>
+                            <constraint firstItem="gFU-xC-LSG" firstAttribute="top" secondItem="Xgm-og-5BQ" secondAttribute="bottom" id="CwF-Z7-BM1"/>
+                            <constraint firstItem="Xgm-og-5BQ" firstAttribute="top" secondItem="r1J-66-N00" secondAttribute="top" id="Zmq-2R-BhI"/>
+                            <constraint firstItem="Xgm-og-5BQ" firstAttribute="leading" secondItem="r1J-66-N00" secondAttribute="leading" id="hR0-0h-YKC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dVQ-8g-6ZK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="2dj-pa-4hI">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="closeAction:" destination="1ve-r3-Xzv" id="mOX-gc-yCs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Xgm-og-5BQ" id="6Xe-fI-PKj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQe-ct-RTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="960" y="867"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6fb-of-uBt">
+            <objects>
+                <navigationController storyboardIdentifier="Settings" automaticallyAdjustsScrollViewInsets="NO" id="pv4-gN-3u7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="H1z-L3-K14">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1ve-r3-Xzv" kind="relationship" relationship="rootViewController" id="Ehg-1y-jOf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tru-VC-XwA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="867"/>
         </scene>
     </scenes>
 </document>

@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = UIImage()
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.registerDefaults(["units": true])
+        defaults.synchronize()
+        
         return true
     }
 

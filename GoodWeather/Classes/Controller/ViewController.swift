@@ -31,7 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         manager = CLLocationManager()
         manager.delegate = self
         manager.requestLocation()
-        
+
         tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
         
         tableView.dataSource = self
@@ -47,6 +47,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
         indicator.center = self.view.center
         self.view.addSubview(indicator)
+        indicator.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +56,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if let
             lat = locations.first?.coordinate.latitude,
             lon = locations.first?.coordinate.longitude
@@ -89,8 +89,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     func refreshWeather(lat: Double, lon: Double) {
-        
-        indicator.startAnimating()
         
         weak var weakSelf = self
         
@@ -143,6 +141,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         backgroundImageView.layer.addAnimation(transition, forKey: nil)
         backgroundImageView.image = Utility.makeGradient(self.view.frame)
+    }
+    
+    @IBAction func goSetting(sender: AnyObject) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+        vc.modalPresentationStyle = .OverFullScreen
+        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
 }
 

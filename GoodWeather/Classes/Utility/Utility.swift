@@ -56,7 +56,16 @@ class Utility {
     }
     
     static func calcKelvin(temp: Double) -> Double {
-        return floor(temp - 273.15)
+        
+        let celsius = floor(temp - 273.15)
+        
+        let units = Utility.getUnitsSetting()
+        
+        if !units {
+            return floor(9 / 5 * celsius + 32)
+        }
+        
+        return celsius
     }
     
     static func translateUnixTime(dt: Int) -> String? {
@@ -64,5 +73,27 @@ class Utility {
         let format = NSDateFormatter()
         format.dateFormat = "MM/dd"
         return format.stringFromDate(date)
+    }
+    
+    static func changeUnitsSetting() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let isTrue = defaults.valueForKey("units") as! Bool
+        
+        if isTrue {
+            defaults.setBool(false, forKey: "units")
+        } else {
+            defaults.setBool(true, forKey: "units")
+        }
+        
+        defaults.synchronize()
+        
+        print("Current setting is \(defaults.valueForKey("units"))")
+    }
+    
+    static func getUnitsSetting() -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        return defaults.valueForKey("units") as! Bool
     }
 }
