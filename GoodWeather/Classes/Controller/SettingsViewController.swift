@@ -62,11 +62,65 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
-        case 0: print("")
-        case 1: print("")
+        case 0: units()
+        case 1: numberOfDays()
         case 2: print("")
         default: return
         }
+    }
+    
+    func units() {
+        let actionSheet = UIAlertController(title: "UNITS", message: "", preferredStyle: .ActionSheet)
+        
+        actionSheet.addAction(
+            UIAlertAction(title: "Celsius", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeUnitsSetting(true)
+            })
+        )
+        actionSheet.addAction(
+            UIAlertAction(title: "Fahrenheit", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeUnitsSetting(false)
+            })
+        )
+        actionSheet.addAction(
+            UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
+                print(action.title)
+            })
+        )
+        
+        self.navigationController?.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    func numberOfDays() {
+        let actionSheet = UIAlertController(title: "NUMBER OF DAYS", message: "", preferredStyle: .ActionSheet)
+        
+        actionSheet.addAction(
+            UIAlertAction(title: "5 Days", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeNumberOfDaysSetting(5)
+            })
+        )
+        actionSheet.addAction(
+            UIAlertAction(title: "7 Days", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeNumberOfDaysSetting(7)
+            })
+        )
+        actionSheet.addAction(
+            UIAlertAction(title: "9 Days", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeNumberOfDaysSetting(9)
+            })
+        )
+        actionSheet.addAction(
+            UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
+                print(action.title)
+            })
+        )
+        
+        self.navigationController?.presentViewController(actionSheet, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

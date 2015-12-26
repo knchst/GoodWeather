@@ -47,11 +47,13 @@ class APIClient {
     
     func getDailyWeather(lat: Double, lon: Double, callback: ((NSError?, NSData?) -> ())) {
         
+        let numberOfDays = Utility.getNumberOfDaysSetting()
+        
         let params = [
             "lat": String(lat),
             "lon": String(lon),
             "appid": appId,
-            "cnt": "7"
+            "cnt": String(numberOfDays)
         ]
         
         Alamofire.request(.GET, baseDailyURL, parameters: params)

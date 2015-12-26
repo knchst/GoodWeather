@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.registerDefaults(["units": true])
+        defaults.registerDefaults(["numberOfDays": 7])
         defaults.synchronize()
         
         return true

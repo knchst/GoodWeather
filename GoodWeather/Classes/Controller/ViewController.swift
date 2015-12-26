@@ -23,6 +23,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     var manager: CLLocationManager!
     var indicator: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         manager = CLLocationManager()
         manager.delegate = self
-        manager.requestLocation()
 
         tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
         
@@ -47,6 +47,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
         indicator.center = self.view.center
         self.view.addSubview(indicator)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        tableView.addSubview(refreshControl)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        update()
+    }
+    
+    func update() {
+        
+        manager.requestLocation()
         indicator.startAnimating()
     }
 
@@ -96,10 +112,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             if error == nil {
                 weakSelf?.tableView.reloadData()
                 weakSelf?.indicator.stopAnimating()
+                weakSelf?.refreshControl.endRefreshing()
             } else {
                 print(error)
                 
                 weakSelf?.indicator.stopAnimating()
+                weakSelf?.refreshControl.endRefreshing()
                 
                 let alert = UIAlertController(title: "Error", message: "Oops! Please try again!!", preferredStyle: .Alert)
                 let retryAction = UIAlertAction(title: "Try Again!", style: .Default, handler: { action in

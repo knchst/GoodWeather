@@ -75,25 +75,35 @@ class Utility {
         return format.stringFromDate(date)
     }
     
-    static func changeUnitsSetting() {
+    static func changeUnitsSetting(bool: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        let isTrue = defaults.valueForKey("units") as! Bool
-        
-        if isTrue {
-            defaults.setBool(false, forKey: "units")
-        } else {
-            defaults.setBool(true, forKey: "units")
-        }
+        defaults.setBool(bool, forKey: "units")
         
         defaults.synchronize()
         
         print("Current setting is \(defaults.valueForKey("units"))")
     }
     
+    static func changeNumberOfDaysSetting(days: Int) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        defaults.setInteger(days, forKey: "numberOfDays")
+        
+        defaults.synchronize()
+        
+        print("Current setting is \(defaults.valueForKey("numberOfDays"))")
+    }
+    
     static func getUnitsSetting() -> Bool {
         let defaults = NSUserDefaults.standardUserDefaults()
         
         return defaults.valueForKey("units") as! Bool
+    }
+    
+    static func getNumberOfDaysSetting() -> Int {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        return defaults.valueForKey("numberOfDays") as! Int
     }
 }
