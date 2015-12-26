@@ -115,6 +115,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             })
         )
         actionSheet.addAction(
+            UIAlertAction(title: "11 Days", style: .Default, handler: {(action) in
+                print(action.title)
+                Utility.changeNumberOfDaysSetting(11)
+            })
+        )
+        actionSheet.addAction(
             UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
                 print(action.title)
             })

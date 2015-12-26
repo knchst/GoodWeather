@@ -120,6 +120,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.tableView.reloadData()
                 weakSelf?.indicator.stopAnimating()
                 weakSelf?.refreshControl.endRefreshing()
+                weakSelf?.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
             } else {
                 print(error)
                 
