@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let cellTitle = [
         "UNITS",
         "NUMBER OF DAYS",
-        "CREDIT"
+        "ABOUT THIS APP"
     ]
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         switch indexPath.row {
         case 0: units()
         case 1: numberOfDays()
-        case 2: print("")
+        case 2: UIApplication.sharedApplication().openURL(NSURL(string: "https://github.com/knchst0704/GoodWeather")!)
         default: return
         }
     }
