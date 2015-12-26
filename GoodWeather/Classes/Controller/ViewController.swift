@@ -46,11 +46,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
         indicator.center = self.view.center
+        indicator.tintColor = .darkGrayColor()
         self.view.addSubview(indicator)
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = .darkGrayColor()
         tableView.addSubview(refreshControl)
     }
     
@@ -62,8 +64,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     func update() {
         
+        if refreshControl.refreshing {
+            refreshControl.attributedTitle = NSAttributedString(string: "Loading..")
+        } else {
+            indicator.startAnimating()
+        }
+        
         manager.requestLocation()
-        indicator.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
