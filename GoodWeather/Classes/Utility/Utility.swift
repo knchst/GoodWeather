@@ -36,15 +36,18 @@ class Utility {
     }
     
     static func makeGradient(frame: CGRect) -> UIImage {
-        let gradientColors: [[CGColor]] = [
-            [lightBlueColor.CGColor, lightPinkColor.CGColor],
-            [lightBlueColor.CGColor, lightGreenColor.CGColor],
-            [darkBlueColor.CGColor, lightGreenColor.CGColor],
-            [lightPinkColor.CGColor, lightGreenColor.CGColor]
+        let gradientColors = [
+            lightBlueColor.CGColor,
+            lightPinkColor.CGColor,
+            lightGreenColor.CGColor,
+            darkBlueColor.CGColor
         ]
         
+        let topColor = gradientColors[random() % gradientColors.count]
+        let bottomColor = gradientColors[random() % gradientColors.count]
+        
         let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors[random() % gradientColors.count]
+        gradientLayer.colors = [topColor, bottomColor]
         gradientLayer.frame = frame
         
         let gradientImage = Utility.imageFromLayer(gradientLayer)
@@ -53,7 +56,16 @@ class Utility {
     }
     
     static func calcKelvin(temp: Double) -> Double {
-        return floor(temp - 273.15)
+        
+        let celsius = floor(temp - 273.15)
+        
+        let units = Utility.getUnitsSetting()
+        
+        if !units {
+            return floor(9 / 5 * celsius + 32)
+        }
+        
+        return celsius
     }
     
     static func translateUnixTime(dt: Int) -> String? {
@@ -61,5 +73,37 @@ class Utility {
         let format = NSDateFormatter()
         format.dateFormat = "MM/dd"
         return format.stringFromDate(date)
+    }
+    
+    static func changeUnitsSetting(bool: Bool) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        defaults.setBool(bool, forKey: "units")
+        
+        defaults.synchronize()
+        
+        print("Current setting is \(defaults.valueForKey("units"))")
+    }
+    
+    static func changeNumberOfDaysSetting(days: Int) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        defaults.setInteger(days, forKey: "numberOfDays")
+        
+        defaults.synchronize()
+        
+        print("Current setting is \(defaults.valueForKey("numberOfDays"))")
+    }
+    
+    static func getUnitsSetting() -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        return defaults.valueForKey("units") as! Bool
+    }
+    
+    static func getNumberOfDaysSetting() -> Int {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        return defaults.valueForKey("numberOfDays") as! Int
     }
 }

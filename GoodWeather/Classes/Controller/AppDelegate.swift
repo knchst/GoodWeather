@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.registerDefaults(["units": true])
+        defaults.registerDefaults(["numberOfDays": 7])
+        defaults.synchronize()
+        
         return true
     }
 

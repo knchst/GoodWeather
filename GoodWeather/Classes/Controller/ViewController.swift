@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Walhalla
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -21,6 +22,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     var manager: CLLocationManager!
+    var indicator: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +31,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         manager = CLLocationManager()
         manager.delegate = self
-        manager.requestLocation()
-        
+
         tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorColor = .clearColor()
         
         NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
         
         imageView.tintColor = .whiteColor()
         
         backgroundImageView.image = Utility.makeGradient(self.view.frame)
+        
+        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        tableView.addSubview(refreshControl)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        update()
+    }
+    
+    func update() {
+        
+        manager.requestLocation()
+        indicator.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +72,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         if let
             lat = locations.first?.coordinate.latitude,
             lon = locations.first?.coordinate.longitude
@@ -88,8 +111,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         ModelManager.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error) in
             if error == nil {
                 weakSelf?.tableView.reloadData()
+                weakSelf?.indicator.stopAnimating()
+                weakSelf?.refreshControl.endRefreshing()
             } else {
                 print(error)
+                
+                weakSelf?.indicator.stopAnimating()
+                weakSelf?.refreshControl.endRefreshing()
                 
                 let alert = UIAlertController(title: "Error", message: "Oops! Please try again!!", preferredStyle: .Alert)
                 let retryAction = UIAlertAction(title: "Try Again!", style: .Default, handler: { action in
@@ -110,6 +138,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
                 weakSelf?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
                 weakSelf?.descriptionLabel.text = weather?.description!
+                
+                Walhalla.performAnimation((weakSelf?.nameLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.minLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.maxLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.imageView)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((weakSelf?.descriptionLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
             } else {
                 print(error)
                 // show alert
@@ -125,6 +159,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         backgroundImageView.layer.addAnimation(transition, forKey: nil)
         backgroundImageView.image = Utility.makeGradient(self.view.frame)
+    }
+    
+    @IBAction func goSetting(sender: AnyObject) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+        vc.modalPresentationStyle = .OverFullScreen
+        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
 }
 

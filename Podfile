@@ -4,7 +4,7 @@
 use_frameworks!
 
 target 'GoodWeather' do
-  pod 'MisterFusion'
+  pod 'Walhalla'
   pod 'SwiftyJSON'
   pod 'Alamofire'
 end
