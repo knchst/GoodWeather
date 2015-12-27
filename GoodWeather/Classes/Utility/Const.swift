@@ -10,6 +10,7 @@ import UIKit
 
 public let baseCurrentURL = "http://api.openweathermap.org/data/2.5/weather"
 public let baseDailyURL = "http://api.openweathermap.org/data/2.5/forecast/daily"
+public let aboutURL = "https://github.com/knchst0704/GoodWeather"
 public let appId = "fadb1ca49b99fa29316876ee7414c427"
 public let dailyWeatherCellIdetifier = "DailyWeatherCell"
 public let settingCellIdetifier = "SettingCell"
