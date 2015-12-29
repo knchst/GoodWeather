@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -15,7 +16,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let cellTitle = [
         "UNITS",
         "NUMBER OF DAYS",
-        "ABOUT THIS APP"
+        "ABOUT THIS APP",
+        "SHARE THIS APP"
     ]
     
     override func viewDidLoad() {
@@ -65,6 +67,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case 0: units()
         case 1: numberOfDays()
         case 2: UIApplication.sharedApplication().openURL(NSURL(string: aboutURL)!)
+        case 3: share()
         default: return
         }
     }
@@ -127,6 +130,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         )
         
         self.navigationController?.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    func share() {
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        vc.addURL(NSURL(string: appURL))
+        vc.setInitialText(initialText)
+        
+        self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
