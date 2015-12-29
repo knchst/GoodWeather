@@ -39,7 +39,7 @@
 		27284B761C2FDA4F00B2D2A4 /* Icon-44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27284B571C2FDA4F00B2D2A4 /* Icon-44@2x.png */; };
 		27284B771C2FDA4F00B2D2A4 /* Icon-86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27284B581C2FDA4F00B2D2A4 /* Icon-86@2x.png */; };
 		27284B781C2FDA4F00B2D2A4 /* Icon-98@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27284B591C2FDA4F00B2D2A4 /* Icon-98@2x.png */; };
-		27284B7A1C2FDEF900B2D2A4 /* GoodWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 27284B791C2FDEF900B2D2A4 /* GoodWeather.png */; };
+		273A06851C32DA5100929355 /* SplashIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 273A06841C32DA5100929355 /* SplashIcon.png */; };
 		2750A54E1C14177C00D17291 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54D1C14177C00D17291 /* ModelManager.swift */; };
 		2750A5501C141F3800D17291 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54F1C141F3800D17291 /* DailyWeather.swift */; };
 		27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E551C12E38A00F10330 /* AppDelegate.swift */; };
@@ -88,7 +88,7 @@
 		27284B571C2FDA4F00B2D2A4 /* Icon-44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-44@2x.png"; sourceTree = "<group>"; };
 		27284B581C2FDA4F00B2D2A4 /* Icon-86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-86@2x.png"; sourceTree = "<group>"; };
 		27284B591C2FDA4F00B2D2A4 /* Icon-98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-98@2x.png"; sourceTree = "<group>"; };
-		27284B791C2FDEF900B2D2A4 /* GoodWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoodWeather.png; sourceTree = "<group>"; };
+		273A06841C32DA5100929355 /* SplashIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashIcon.png; sourceTree = "<group>"; };
 		2750A54D1C14177C00D17291 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		2750A54F1C141F3800D17291 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		27532E551C12E38A00F10330 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		27284B361C2FDA4F00B2D2A4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27284B791C2FDEF900B2D2A4 /* GoodWeather.png */,
+				273A06841C32DA5100929355 /* SplashIcon.png */,
 				27284B371C2FDA4F00B2D2A4 /* ios */,
 				27284B4F1C2FDA4F00B2D2A4 /* watchkit */,
 			);
@@ -376,9 +376,9 @@
 				27284B661C2FDA4F00B2D2A4 /* Icon-60.png in Resources */,
 				27284B5F1C2FDA4F00B2D2A4 /* Icon-60@3x.png in Resources */,
 				27284B601C2FDA4F00B2D2A4 /* Icon-76.png in Resources */,
+				273A06851C32DA5100929355 /* SplashIcon.png in Resources */,
 				27284B721C2FDA4F00B2D2A4 /* Icon-27.5@2x.png in Resources */,
 				27284B6E1C2FDA4F00B2D2A4 /* iTunesArtwork@2x.png in Resources */,
-				27284B7A1C2FDEF900B2D2A4 /* GoodWeather.png in Resources */,
 				27284B5B1C2FDA4F00B2D2A4 /* Icon-40.png in Resources */,
 				27284B671C2FDA4F00B2D2A4 /* Icon-72.png in Resources */,
 				27284B5E1C2FDA4F00B2D2A4 /* Icon-60@2x.png in Resources */,
