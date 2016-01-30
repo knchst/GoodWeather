@@ -38,8 +38,8 @@ class Utility {
     static func makeGradient(frame: CGRect) -> UIImage {
         let gradientColors = colors
         
-        let topColor = gradientColors[random() % gradientColors.count]
-        let bottomColor = gradientColors[random() % gradientColors.count]
+        let topColor = gradientColors[Int(arc4random_uniform(UInt32(gradientColors.count)))]
+        let bottomColor = gradientColors[Int(arc4random_uniform(UInt32(gradientColors.count)))]
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = [topColor, bottomColor]
