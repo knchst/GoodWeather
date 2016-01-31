@@ -26,7 +26,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="4KK-7C-6vg"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -35,7 +35,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="VDV-Xe-Gb2"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -44,7 +44,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="ULM-gW-cWh"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>

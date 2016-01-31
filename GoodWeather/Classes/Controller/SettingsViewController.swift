@@ -16,8 +16,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     let cellTitle = [
         "UNITS",
         "NUMBER OF DAYS",
-        "ABOUT THIS APP",
-        "SHARE THIS APP"
+        "ABOUT",
+        "SHARE"
     ]
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier(settingCellIdetifier, forIndexPath: indexPath)
         cell.backgroundColor = .clearColor()
         cell.selectionStyle = .None
-        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 25)
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 30)
         cell.textLabel?.textColor = .whiteColor()
         cell.textLabel?.textAlignment = .Center
         cell.textLabel?.text = cellTitle[indexPath.row]
