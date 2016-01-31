@@ -16,6 +16,7 @@ public let initialText = "This is awesome weather app!!! #GoodWeather"
 public let appId = "fadb1ca49b99fa29316876ee7414c427"
 public let dailyWeatherCellIdetifier = "DailyWeatherCell"
 public let settingCellIdetifier = "SettingCell"
+public let settingsViewControllerIdetifier = "Settings"
 
 public let lightBlueColor = Utility.hexColor("#438af8", alpha: 1).CGColor
 public let lightGreenColor = Utility.hexColor("#4cedba", alpha: 1).CGColor

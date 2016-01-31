@@ -170,7 +170,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     @IBAction func goSetting(sender: AnyObject) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(settingsViewControllerIdetifier)
         vc.modalPresentationStyle = .OverFullScreen
         self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }

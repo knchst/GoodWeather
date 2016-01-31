@@ -73,7 +73,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func units() {
-        let actionSheet = UIAlertController(title: "UNITS", message: "", preferredStyle: .ActionSheet)
+        let actionSheet = UIAlertController()
         
         actionSheet.addAction(
             UIAlertAction(title: "Celsius", style: .Default, handler: {(action) in
@@ -97,32 +97,19 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func numberOfDays() {
-        let actionSheet = UIAlertController(title: "NUMBER OF DAYS", message: "", preferredStyle: .ActionSheet)
+        let actionSheet = UIAlertController()
         
-        actionSheet.addAction(
-            UIAlertAction(title: "5 Days", style: .Default, handler: {(action) in
-                print(action.title)
-                Utility.changeNumberOfDaysSetting(5)
-            })
-        )
-        actionSheet.addAction(
-            UIAlertAction(title: "7 Days", style: .Default, handler: {(action) in
-                print(action.title)
-                Utility.changeNumberOfDaysSetting(7)
-            })
-        )
-        actionSheet.addAction(
-            UIAlertAction(title: "9 Days", style: .Default, handler: {(action) in
-                print(action.title)
-                Utility.changeNumberOfDaysSetting(9)
-            })
-        )
-        actionSheet.addAction(
-            UIAlertAction(title: "11 Days", style: .Default, handler: {(action) in
-                print(action.title)
-                Utility.changeNumberOfDaysSetting(11)
-            })
-        )
+        let days = [5, 7, 9, 11]
+        
+        for day in days {
+            actionSheet.addAction(
+                UIAlertAction(title: "\(day) Days", style: .Default, handler: {(action) in
+                    print(action.title)
+                    Utility.changeNumberOfDaysSetting(day)
+                })
+            )
+        }
+        
         actionSheet.addAction(
             UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
                 print(action.title)
