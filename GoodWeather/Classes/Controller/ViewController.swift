@@ -29,31 +29,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        manager = CLLocationManager()
-        manager.delegate = self
-
-        tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clearColor()
-        
-        NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
-        
-        imageView.tintColor = .whiteColor()
-        
-        backgroundImageView.image = Utility.makeGradient(self.view.frame)
-        
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        indicator.center = self.view.center
-        indicator.tintColor = .darkGrayColor()
-        self.view.addSubview(indicator)
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.tintColor = .darkGrayColor()
-        tableView.addSubview(refreshControl)
+        configure()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,22 +37,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         update()
     }
-    
-    func update() {
-        
-        if refreshControl.refreshing {
-            refreshControl.attributedTitle = NSAttributedString(string: "Loading..")
-        } else {
-            indicator.startAnimating()
-        }
-        
-        manager.requestLocation()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let
@@ -100,16 +67,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         }
     }
     
+    // MARK: - UITableViewDataSource
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ModelManager.sharedInstance.dailyWeather.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(dailyWeatherCellIdetifier, forIndexPath: indexPath) as! DailyWeatherTableViewCell
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as DailyWeatherTableViewCell
         let dailyWeather = ModelManager.sharedInstance.dailyWeather[indexPath.row]
         cell.setData(dailyWeather)
         return cell
     }
+    
+    // MARK: - Private
     
     func refreshWeather(lat: Double, lon: Double) {
         
@@ -157,6 +128,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 // show alert
             }
         })
+    }
+    
+    private func update() {
+        
+        if refreshControl.refreshing {
+            refreshControl.attributedTitle = NSAttributedString(string: "Loading..")
+        } else {
+            indicator.startAnimating()
+        }
+        
+        manager.requestLocation()
+    }
+    
+    private func configure() {
+        
+        manager = CLLocationManager()
+        manager.delegate = self
+        
+        tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorColor = .clearColor()
+        tableView.register(DailyWeatherTableViewCell.self)
+        
+        NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
+        
+        imageView.tintColor = .whiteColor()
+        
+        backgroundImageView.image = Utility.makeGradient(self.view.frame)
+        
+        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        indicator.center = self.view.center
+        indicator.tintColor = .darkGrayColor()
+        self.view.addSubview(indicator)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = .darkGrayColor()
+        tableView.addSubview(refreshControl)
     }
     
     func transitionBackground() {

@@ -23,25 +23,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = .clearColor()
-        tableView.separatorStyle = .None
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: settingCellIdetifier)
-        
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            self.view.backgroundColor = .clearColor()
-            
-            let blurEffect = UIBlurEffect(style: .Dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = self.view.frame
-            
-            tableView.backgroundView = blurEffectView
-            
-        } else {
-            self.view.backgroundColor = .blackColor()
-        }
+        configure()
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTitle.count
@@ -58,6 +48,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    // MARK: - UITableViewDelegate
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
     }
@@ -72,7 +64,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func units() {
+    // MARK: - Private
+    
+    private func units() {
         let actionSheet = UIAlertController()
         
         actionSheet.addAction(
@@ -96,7 +90,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.presentViewController(actionSheet, animated: true, completion: nil)
     }
     
-    func numberOfDays() {
+    private func numberOfDays() {
         let actionSheet = UIAlertController()
         
         let days = [5, 7, 9, 11]
@@ -119,17 +113,34 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.presentViewController(actionSheet, animated: true, completion: nil)
     }
     
-    func share() {
+    private func share() {
         let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         vc.addURL(NSURL(string: appURL))
         vc.setInitialText(initialText)
         
         self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
+    
+    private func configure() {
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = .clearColor()
+        tableView.separatorStyle = .None
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: settingCellIdetifier)
+        
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.view.backgroundColor = .clearColor()
+            
+            let blurEffect = UIBlurEffect(style: .Dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = self.view.frame
+            
+            tableView.backgroundView = blurEffectView
+            
+        } else {
+            self.view.backgroundColor = .blackColor()
+        }
     }
     
     @IBAction func closeAction(sender: AnyObject) {

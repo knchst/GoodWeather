@@ -14,7 +14,6 @@ public let aboutURL = "https://github.com/knchst0704/GoodWeather"
 public let appURL = "https://itunes.apple.com/us/app/goodweather-simple-weather/id1070984729?ls=1&mt=8"
 public let initialText = "This is awesome weather app!!! #GoodWeather"
 public let appId = "fadb1ca49b99fa29316876ee7414c427"
-public let dailyWeatherCellIdetifier = "DailyWeatherCell"
 public let settingCellIdetifier = "SettingCell"
 public let settingsViewControllerIdetifier = "Settings"
 
