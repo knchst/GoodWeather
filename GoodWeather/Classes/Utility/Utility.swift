@@ -53,9 +53,7 @@ class Utility {
     static func calcKelvin(temp: Double) -> Double {
         
         let celsius = floor(temp - 273.15)
-        
         let units = Utility.getUnitsSetting()
-        
         if !units {
             return floor(9 / 5 * celsius + 32)
         }
@@ -72,22 +70,18 @@ class Utility {
     
     static func changeUnitsSetting(bool: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        
         defaults.setBool(bool, forKey: "units")
-        
         defaults.synchronize()
         
-        print("Current setting is \(defaults.valueForKey("units"))")
+        print("Current units is \(defaults.valueForKey("units"))")
     }
     
     static func changeNumberOfDaysSetting(days: Int) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        
         defaults.setInteger(days, forKey: "numberOfDays")
-        
         defaults.synchronize()
         
-        print("Current setting is \(defaults.valueForKey("numberOfDays"))")
+        print("Current days is \(defaults.valueForKey("numberOfDays"))")
     }
     
     static func getUnitsSetting() -> Bool {

@@ -67,12 +67,12 @@ struct DailyWeather {
                 weather.icon = icon
                 weather.humidity = humidity
                 weather.pressure = pressure
-                weather.day = Utility.calcKelvin(day)
-                weather.eve = Utility.calcKelvin(eve)
-                weather.morn = Utility.calcKelvin(morn)
-                weather.night = Utility.calcKelvin(night)
-                weather.min = Utility.calcKelvin(min)
-                weather.max = Utility.calcKelvin(max)
+                weather.day = day
+                weather.eve = eve
+                weather.morn = morn
+                weather.night = night
+                weather.min = min
+                weather.max = max
                 weather.main = main
                 weather.dt = Utility.translateUnixTime(dt)
             }

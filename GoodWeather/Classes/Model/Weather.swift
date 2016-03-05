@@ -47,11 +47,11 @@ struct Weather {
             weather.main = main
             weather.description = description
             weather.icon = icon
-            weather.temp = Utility.calcKelvin(temp)
+            weather.temp = temp
             weather.pressure = pressure
             weather.humidity = humidity
-            weather.temp_max = Utility.calcKelvin(temp_max)
-            weather.temp_min = Utility.calcKelvin(temp_min)
+            weather.temp_max = temp_max
+            weather.temp_min = temp_min
             weather.name = name
         }
         

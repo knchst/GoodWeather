@@ -24,7 +24,6 @@ public let lightPinkColor = Utility.hexColor("#fe80be", alpha: 1).CGColor
 public let lightOrangeColor = Utility.hexColor("#fd746c", alpha: 1).CGColor
 public let lightYellowColor = Utility.hexColor("#f09819", alpha: 1).CGColor
 public let lightPurpleColor = Utility.hexColor("#aa076b", alpha: 1).CGColor
-public let lightGrayColor = Utility.hexColor("#232526", alpha: 1).CGColor
 
 public let colors = [
     lightBlueColor,
@@ -33,6 +32,5 @@ public let colors = [
     lightPinkColor,
     lightOrangeColor,
     lightYellowColor,
-    lightPurpleColor,
-    lightGrayColor
+    lightPurpleColor
 ]

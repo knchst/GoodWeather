@@ -9,7 +9,7 @@
 import UIKit
 import Social
 
-class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,7 +31,14 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - UITableViewDataSource
+    @IBAction func closeAction(sender: AnyObject) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension SettingsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTitle.count
@@ -47,8 +54,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = cellTitle[indexPath.row]
         return cell
     }
-    
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+
+extension SettingsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 80
@@ -63,26 +73,27 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         default: return
         }
     }
-    
-    // MARK: - Private
-    
+}
+
+// MARK: - Private
+
+extension SettingsViewController {
     private func units() {
         let actionSheet = UIAlertController()
-        
         actionSheet.addAction(
-            UIAlertAction(title: "Celsius", style: .Default, handler: {(action) in
+            UIAlertAction(title: "Celsius", style: .Default, handler: { action in
                 print(action.title)
                 Utility.changeUnitsSetting(true)
             })
         )
         actionSheet.addAction(
-            UIAlertAction(title: "Fahrenheit", style: .Default, handler: {(action) in
+            UIAlertAction(title: "Fahrenheit", style: .Default, handler: { action in
                 print(action.title)
                 Utility.changeUnitsSetting(false)
             })
         )
         actionSheet.addAction(
-            UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
+            UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
                 print(action.title)
             })
         )
@@ -97,7 +108,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         for day in days {
             actionSheet.addAction(
-                UIAlertAction(title: "\(day) Days", style: .Default, handler: {(action) in
+                UIAlertAction(title: "\(day) Days", style: .Default, handler: { action in
                     print(action.title)
                     Utility.changeNumberOfDaysSetting(day)
                 })
@@ -105,7 +116,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         actionSheet.addAction(
-            UIAlertAction(title: "Cancel", style: .Cancel, handler: {(action) in
+            UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
                 print(action.title)
             })
         )
@@ -122,7 +133,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     private func configure() {
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clearColor()
@@ -141,9 +152,5 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             self.view.backgroundColor = .blackColor()
         }
-    }
-    
-    @IBAction func closeAction(sender: AnyObject) {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }
