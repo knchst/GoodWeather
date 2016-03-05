@@ -34,7 +34,7 @@ class DailyWeatherTableViewCell: UITableViewCell {
         weatherImageView.image = UIImage(named: dailyWeather.main!)?.imageWithRenderingMode(.AlwaysTemplate)
         dateLabel.text = dailyWeather.dt!
         descriptionLabel.text = dailyWeather.description
-        tempMaxLabel.text = String(format: "%g°", dailyWeather.max!)
-        tempMinLabel.text = String(format: "%g°", dailyWeather.min!)
+        tempMaxLabel.text = String(format: "%g°", Utility.calcKelvin(dailyWeather.max!))
+        tempMinLabel.text = String(format: "%g°", Utility.calcKelvin(dailyWeather.min!))
     }
 }

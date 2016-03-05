@@ -28,10 +28,10 @@ class APIClient {
         Alamofire.request(.GET, baseCurrentURL, parameters: params)
             .responseJSON { response in
                 
-//                print(response.request)
-//                print(response.response)
-//                print(response.data)
-//                print(response.result.value)
+                print(response.request)
+                print(response.response)
+                print(response.data)
+                print(response.result.value)
                 
                 switch response.result {
                 case .Success:
@@ -59,10 +59,10 @@ class APIClient {
         Alamofire.request(.GET, baseDailyURL, parameters: params)
             .responseJSON { response in
                 
-//                print(response.request)
-//                print(response.response)
-//                print(response.data)
-//                print(response.result.value)
+                print(response.request)
+                print(response.response)
+                print(response.data)
+                print(response.result.value)
                 
                 switch response.result {
                 case .Success:

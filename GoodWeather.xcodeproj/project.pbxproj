@@ -42,6 +42,10 @@
 		273A06851C32DA5100929355 /* SplashIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 273A06841C32DA5100929355 /* SplashIcon.png */; };
 		2750A54E1C14177C00D17291 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54D1C14177C00D17291 /* ModelManager.swift */; };
 		2750A5501C141F3800D17291 /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2750A54F1C141F3800D17291 /* DailyWeather.swift */; };
+		2751B64E1C5E2549007B3670 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751B64D1C5E2549007B3670 /* NibLoadableView.swift */; };
+		2751B6501C5E2585007B3670 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751B64F1C5E2585007B3670 /* ReusableView.swift */; };
+		2751B6531C5E26A5007B3670 /* UITableViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2751B6521C5E26A5007B3670 /* UITableViewExtention.swift */; };
+		2751B6551C5E27E1007B3670 /* DailyWeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2751B6541C5E27E1007B3670 /* DailyWeatherTableViewCell.xib */; };
 		27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E551C12E38A00F10330 /* AppDelegate.swift */; };
 		27532E5A1C12E38A00F10330 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E561C12E38A00F10330 /* ViewController.swift */; };
 		27532E5C1C12E3CC00F10330 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27532E5B1C12E3CC00F10330 /* Weather.swift */; };
@@ -91,6 +95,10 @@
 		273A06841C32DA5100929355 /* SplashIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashIcon.png; sourceTree = "<group>"; };
 		2750A54D1C14177C00D17291 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		2750A54F1C141F3800D17291 /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
+		2751B64D1C5E2549007B3670 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		2751B64F1C5E2585007B3670 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		2751B6521C5E26A5007B3670 /* UITableViewExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtention.swift; sourceTree = "<group>"; };
+		2751B6541C5E27E1007B3670 /* DailyWeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailyWeatherTableViewCell.xib; sourceTree = "<group>"; };
 		27532E551C12E38A00F10330 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27532E561C12E38A00F10330 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27532E5B1C12E3CC00F10330 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -191,9 +199,18 @@
 			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
+		2751B6511C5E265B007B3670 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				2751B6521C5E26A5007B3670 /* UITableViewExtention.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
 		27532E531C12E38A00F10330 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2751B6511C5E265B007B3670 /* Extention */,
 				27532E5D1C12E60F00F10330 /* Utility */,
 				27532E541C12E38A00F10330 /* Controller */,
 				27532E571C12E38A00F10330 /* Model */,
@@ -226,6 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				27D6C9CE1C19EBC80033BCC0 /* DailyWeatherTableViewCell.swift */,
+				2751B64D1C5E2549007B3670 /* NibLoadableView.swift */,
+				2751B64F1C5E2585007B3670 /* ReusableView.swift */,
+				2751B6541C5E27E1007B3670 /* DailyWeatherTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,6 +399,7 @@
 				273A06851C32DA5100929355 /* SplashIcon.png in Resources */,
 				27284B721C2FDA4F00B2D2A4 /* Icon-27.5@2x.png in Resources */,
 				27284B6E1C2FDA4F00B2D2A4 /* iTunesArtwork@2x.png in Resources */,
+				2751B6551C5E27E1007B3670 /* DailyWeatherTableViewCell.xib in Resources */,
 				27284B5B1C2FDA4F00B2D2A4 /* Icon-40.png in Resources */,
 				27284B671C2FDA4F00B2D2A4 /* Icon-72.png in Resources */,
 				27284B5E1C2FDA4F00B2D2A4 /* Icon-60@2x.png in Resources */,
@@ -441,12 +462,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2751B64E1C5E2549007B3670 /* NibLoadableView.swift in Sources */,
 				27D6C9CF1C19EBC80033BCC0 /* DailyWeatherTableViewCell.swift in Sources */,
+				2751B6531C5E26A5007B3670 /* UITableViewExtention.swift in Sources */,
 				27532E5A1C12E38A00F10330 /* ViewController.swift in Sources */,
 				27073E2C1C1FCED600D0F326 /* Utility.swift in Sources */,
 				2750A5501C141F3800D17291 /* DailyWeather.swift in Sources */,
 				27532E5F1C12E63B00F10330 /* Const.swift in Sources */,
 				27532E5C1C12E3CC00F10330 /* Weather.swift in Sources */,
+				2751B6501C5E2585007B3670 /* ReusableView.swift in Sources */,
 				278FA90B1C2C63CE005474A0 /* SettingsViewController.swift in Sources */,
 				27532E611C12E6AE00F10330 /* APIClient.swift in Sources */,
 				27532E591C12E38A00F10330 /* AppDelegate.swift in Sources */,

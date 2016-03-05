@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Walhalla
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -27,33 +27,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        manager = CLLocationManager()
-        manager.delegate = self
-
-        tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorColor = .clearColor()
-        
-        NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
-        
-        imageView.tintColor = .whiteColor()
-        
-        backgroundImageView.image = Utility.makeGradient(self.view.frame)
-        
-        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        indicator.center = self.view.center
-        indicator.tintColor = .darkGrayColor()
-        self.view.addSubview(indicator)
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.tintColor = .darkGrayColor()
-        tableView.addSubview(refreshControl)
+        configure()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,22 +36,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         update()
     }
-    
-    func update() {
-        
-        if refreshControl.refreshing {
-            refreshControl.attributedTitle = NSAttributedString(string: "Loading..")
-        } else {
-            indicator.startAnimating()
-        }
-        
-        manager.requestLocation()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+// MARK: - UITableViewDataSource
+
+extension ViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ModelManager.sharedInstance.dailyWeather.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as DailyWeatherTableViewCell
+        let dailyWeather = ModelManager.sharedInstance.dailyWeather[indexPath.row]
+        cell.setData(dailyWeather)
+        return cell
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let
@@ -99,64 +84,84 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             manager.requestWhenInUseAuthorization()
         }
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ModelManager.sharedInstance.dailyWeather.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(dailyWeatherCellIdetifier, forIndexPath: indexPath) as! DailyWeatherTableViewCell
-        let dailyWeather = ModelManager.sharedInstance.dailyWeather[indexPath.row]
-        cell.setData(dailyWeather)
-        return cell
-    }
-    
-    func refreshWeather(lat: Double, lon: Double) {
+}
+
+// MARK: - Private
+
+extension ViewController {
+    private func refreshWeather(lat: Double, lon: Double) {
         
-        weak var weakSelf = self
-        
-        ModelManager.sharedInstance.getDailyWeather(lat, lon: lon, callback: {(error) in
+        ModelManager.sharedInstance.getDailyWeather(lat, lon: lon, callback: { [weak self] error in
             if error == nil {
-                weakSelf?.tableView.reloadData()
-                weakSelf?.indicator.stopAnimating()
-                weakSelf?.refreshControl.endRefreshing()
-                weakSelf?.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+                self?.tableView.reloadData()
+                self?.indicator.stopAnimating()
+                self?.refreshControl.endRefreshing()
+                self?.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
             } else {
                 print(error)
                 
-                weakSelf?.indicator.stopAnimating()
-                weakSelf?.refreshControl.endRefreshing()
+                self?.indicator.stopAnimating()
+                self?.refreshControl.endRefreshing()
                 
                 let alert = UIAlertController(title: "Error", message: "Oops! Please try again!!", preferredStyle: .Alert)
                 let retryAction = UIAlertAction(title: "Try Again!", style: .Default, handler: { action in
-                    weakSelf?.manager.requestLocation()
+                    self?.manager.requestLocation()
                 })
                 
                 alert.addAction(retryAction)
-                weakSelf?.presentViewController(alert, animated: true, completion: nil)
+                self?.presentViewController(alert, animated: true, completion: nil)
                 
                 return
             }
         })
         
-        ModelManager.sharedInstance.getWeather(lat, lon: lon, callback: {(error, weather) in
+        ModelManager.sharedInstance.getWeather(lat, lon: lon, callback: { [weak self] error, weather in
             if error == nil {
-                weakSelf?.nameLabel.text = weather?.name!
-                weakSelf?.minLabel.text = String(format: "%g°", (weather?.temp_min)!)
-                weakSelf?.maxLabel.text = String(format: "%g°", (weather?.temp_max)!)
-                weakSelf?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
-                weakSelf?.descriptionLabel.text = weather?.description!
+                self?.nameLabel.text = weather?.name!
+                self?.minLabel.text = String(format: "%g°", (Utility.calcKelvin((weather?.temp_min!)!)))
+                self?.maxLabel.text = String(format: "%g°", (Utility.calcKelvin((weather?.temp_max!)!)))
+                self?.imageView.image = UIImage(named: (weather?.main)!)?.imageWithRenderingMode(.AlwaysTemplate)
+                self?.descriptionLabel.text = weather?.description!
                 
-                Walhalla.performAnimation((weakSelf?.nameLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
-                Walhalla.performAnimation((weakSelf?.minLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
-                Walhalla.performAnimation((weakSelf?.maxLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
-                Walhalla.performAnimation((weakSelf?.imageView)!, duration: 1.0, delay: 0, type: .FadeIn)
-                Walhalla.performAnimation((weakSelf?.descriptionLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((self?.nameLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((self?.minLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((self?.maxLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((self?.imageView)!, duration: 1.0, delay: 0, type: .FadeIn)
+                Walhalla.performAnimation((self?.descriptionLabel)!, duration: 1.0, delay: 0, type: .FadeIn)
             } else {
                 print(error)
                 // show alert
             }
         })
+    }
+    
+    private func configure() {
+        
+        manager = CLLocationManager()
+        manager.delegate = self
+        
+        tableViewTopConstrait.constant = UIScreen.mainScreen().bounds.size.height / 2 - 64
+        
+        tableView.dataSource = self
+        tableView.separatorColor = .clearColor()
+        tableView.register(DailyWeatherTableViewCell.self)
+        
+        NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "transitionBackground", userInfo: nil, repeats: true)
+        
+        imageView.tintColor = .whiteColor()
+        
+        backgroundImageView.image = Utility.makeGradient(self.view.frame)
+        
+        indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        indicator.center = self.view.center
+        indicator.tintColor = .darkGrayColor()
+        self.view.addSubview(indicator)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "update", forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = .darkGrayColor()
+        tableView.addSubview(refreshControl)
     }
     
     func transitionBackground() {
@@ -169,8 +174,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         backgroundImageView.image = Utility.makeGradient(self.view.frame)
     }
     
+    func update() {
+        
+        if refreshControl.refreshing {
+            refreshControl.attributedTitle = NSAttributedString(string: "Loading..")
+        } else {
+            indicator.startAnimating()
+        }
+        
+        manager.requestLocation()
+    }
+    
     @IBAction func goSetting(sender: AnyObject) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Settings")
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(settingsViewControllerIdetifier)
         vc.modalPresentationStyle = .OverFullScreen
         self.navigationController?.presentViewController(vc, animated: true, completion: nil)
     }
