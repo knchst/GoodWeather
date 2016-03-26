@@ -2,6 +2,8 @@
 
 GoodWeather is opensource ios app written by Swift.
 
+[View in AppStore](https://itunes.apple.com/us/app/goodweather-simple-weather/id1070984729?mt=8)
+
 ![](https://github.com/knchst0704/GoodWeather/blob/master/GoodWeather/Resources/SplashIcon.png)
 
 ## How to build
